@@ -29,8 +29,8 @@ group = "com.rhtech"
 // The configuration example below shows the minimum required properties
 // configured to publish your plugin to the plugin portal
 pluginBundle {
-    website = 'http://www.gradle.org/'
-    vcsUrl = 'https://github.com/gradle/gradle'
+    website = 'https://github.com/rozaydin/SpringBootVersionPlugin'
+    vcsUrl = 'https://github.com/rozaydin/SpringBootVersionPlugin'
     description = 'Automatically Manages Version For Spring Boot Applications!'
     tags = ['SpringBoot', 'Version']
 

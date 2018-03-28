@@ -16,15 +16,8 @@ public class SpringBootVersionPlugin implements Plugin<Project>
         {
             Properties properties = new Properties();
             properties.load(is);
-
             project.getExtensions().getExtraProperties().set("appName", properties.getProperty("spring.application.name"));
             project.getExtensions().getExtraProperties().set("version", properties.getProperty("spring.application.version"));
-
-            project.getLogger().lifecycle(properties.getProperty("spring.application.name"));
-            project.getLogger().lifecycle(properties.getProperty("spring.application.version"));
-
-            project.getLogger().lifecycle(project.getExtensions().getExtraProperties().get("appName").toString());
-
         }
         catch (Exception exc)
         {

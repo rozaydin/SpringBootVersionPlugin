@@ -6,13 +6,13 @@ buildscript {
     }
     dependencies {
         classpath "com.gradle.publish:plugin-publish-plugin:0.9.10"
+        classpath 'org.junit.platform:junit-platform-gradle-plugin:1.0.1'
     }
 }
 
 apply plugin: "com.gradle.plugin-publish"
-apply plugin: 'groovy'
-
-apply plugin: 'maven'
+apply plugin: "java"
+apply plugin: "org.junit.platform.gradle.plugin"
 
 repositories {
     mavenCentral()
@@ -21,9 +21,15 @@ repositories {
 
 dependencies {
     compile gradleApi()
+    testCompile(
+            'org.junit.jupiter:junit-jupiter-api:5.0.1'
+    )
+    testRuntime(
+            'org.junit.jupiter:junit-jupiter-engine:5.0.1'
+    )
 }
 
-version = "0.1"
+version = "0.8"
 group = "com.rhtech"
 
 // The configuration example below shows the minimum required properties

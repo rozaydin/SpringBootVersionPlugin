@@ -2,6 +2,7 @@ package com.rhtech;
 
 import org.gradle.api.Plugin;
 import org.gradle.api.Project;
+import org.gradle.api.provider.ProviderFactory;
 
 import java.io.FileInputStream;
 import java.io.InputStream;
@@ -19,8 +20,8 @@ public class SpringBootVersionPlugin implements Plugin<Project>
             {
                 Properties properties = new Properties();
                 properties.load(is);
-                project.getExtensions().getExtraProperties().set("appTitle", properties.getProperty(extension.getAppTitle().get()));
-                project.getExtensions().getExtraProperties().set("version", properties.getProperty(extension.getAppVersion().get()));
+                project.getExtensions().getExtraProperties().set(Property.appTitle.name(), properties.getProperty(extension.getAppTitle().get()));
+                project.getExtensions().getExtraProperties().set(Property.appVersion.name(), properties.getProperty(extension.getAppVersion().get()));
             }
             catch (Exception exc)
             {

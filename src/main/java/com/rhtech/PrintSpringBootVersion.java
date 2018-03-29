@@ -7,8 +7,8 @@ public class PrintSpringBootVersion extends DefaultTask
 {
     @TaskAction
     public void printSpringBootVersion() {
-        String appName = getProject().getExtensions().getExtraProperties().get("appName").toString();
-        String version = getProject().getExtensions().getExtraProperties().get("version").toString();
-        System.out.println("appname: " + appName + " " + "version: " + version);
+        String appName = getProject().getExtensions().getExtraProperties().get(Property.appTitle.name()).toString();
+        String version = getProject().getExtensions().getExtraProperties().get(Property.appVersion.name()).toString();
+        System.out.println(Property.appTitle.name() + ": " + appName + ", " + Property.appTitle.name() + ": " + version);
     }
 }

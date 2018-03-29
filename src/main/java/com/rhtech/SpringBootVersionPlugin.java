@@ -11,17 +11,23 @@ public class SpringBootVersionPlugin implements Plugin<Project>
 {
     @Override public void apply(Project project)
     {
-        final String application_properties_path = project.getRootDir().getAbsolutePath() + "/src/main/resources/application.properties";
-        try (InputStream is = new FileInputStream(application_properties_path))
-        {
-            Properties properties = new Properties();
-            properties.load(is);
-            project.getExtensions().getExtraProperties().set("appName", properties.getProperty("spring.application.name"));
-            project.getExtensions().getExtraProperties().set("version", properties.getProperty("spring.application.version"));
-        }
-        catch (Exception exc)
-        {
-            project.getLogger().error("Unable to load application.properties file!", exc);
-        }
+        VersionExtension extension = project.getExtensions().create("versionProperties", VersionExtension.class, project);
+        // https://github.com/jonathanhood/gradle-plugin-example/blob/master/tutorial/5-making-configurable-plugins.md
+        project.afterEvaluate((proj) -> {
+            final String application_properties_path = project.getRootDir().getAbsolutePath() + "/src/main/resources/application.properties";
+            try (InputStream is = new FileInputStream(application_properties_path))
+            {
+                Properties properties = new Properties();
+                properties.load(is);
+                project.getExtensions().getExtraProperties().set("appTitle", properties.getProperty(extension.getAppTitle().get()));
+                project.getExtensions().getExtraProperties().set("version", properties.getProperty(extension.getAppVersion().get()));
+            }
+            catch (Exception exc)
+            {
+                project.getLogger().error("Unable to load application.properties file!", exc);
+            }
+        });
+        // create task
+        project.getTasks().create("printSpringBootVersion", PrintSpringBootVersion.class);
     }
 }
